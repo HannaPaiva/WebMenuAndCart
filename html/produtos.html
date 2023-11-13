@@ -33,18 +33,34 @@
 
     $(document).ready(function () {
       CartCount()
+      GetProductData()
     });
 
-    function GetProductData(){
-      $.ajax({
-        method: "POST",
-        url: "data.php",
-        data: { name: "John", location: "Boston" }
-      })
-        .done(function( msg ) {
-          alert( "Data Saved: " + msg );
+    // function GetProductData(){
+    //   $.ajax({
+    //     method: "GET",
+    //     url: "../php/getProdutos.php",
+    //   })
+    //     .done(function( msg ) {
+    //       console.log( "Data Saved: " + msg );
+    //     });
+    // }
+
+    function GetProductData() {
+    $.ajax({
+        method: "GET",
+        url: "../php/getProdutos.php",
+    })
+    .done(function(response) {
+        // Parse JSON response
+        var products = JSON.parse(response);
+        console.log(products)
+        // Log each product in the console
+        products.forEach(function(product) {
+           console.log(product.id);
         });
-    }
+    });
+}
     function CartCount() {
       
       let cart = getCart();
