@@ -114,7 +114,7 @@ function updateCartList() {
       
       console.log("o total é " + parseFloat(totalCarrinho))
 
-      cartListElement.appendChild(listItem);
+      // cartListElement.appendChild(listItem);
 
     });
 

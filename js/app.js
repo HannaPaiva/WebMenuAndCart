@@ -1,4 +1,3 @@
-
  const products = [
   {
     name: "Casaco Quadriculado",
@@ -89,7 +88,7 @@ function getCookie(name) {
 function getCookieExpiration() {
   const date = new Date();
   date.setDate(date.getDate() + 10);
-  console.log(date.toUTCString())
+  // console.log(date.toUTCString())
   return date.toUTCString();
 }
 
@@ -112,13 +111,13 @@ function updateCartList() {
       totalCarrinho = parseFloat(totalCarrinho) + parseFloat(item.price)
       listItem.textContent = `${item.product} - ${item.price}€`;
       
-      console.log("o total é " + parseFloat(totalCarrinho))
+      // console.log("o total é " + parseFloat(totalCarrinho))
 
-      cartListElement.appendChild(listItem);
+      // cartListElement.appendChild(listItem);
 
     });
 
-    totalLabelElement.textContent = `${totalCarrinho.toFixed(2)}€`; // Arredonda para 2 casas decimais
+    // totalLabelElement.textContent = `${totalCarrinho.toFixed(2)}€`; // Arredonda para 2 casas decimais
 
 
 
