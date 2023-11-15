@@ -9,15 +9,6 @@
 
 
 
-  // foreach ($result as $row) {
-    
-  //   echo  $row['id'];
-  //   echo  $row['name'];
-  //   echo  $row['price'] ;
- 
-  // }
-
-
 $product = [];
 
 foreach ($result as $row) {
@@ -25,6 +16,7 @@ foreach ($result as $row) {
         'id'    => $row['id'],
         'name'  => $row['name'],
         'price' => $row['price'],
+        'imageSrc' => $row['imageSrc']
         // Adicione outros campos conforme necessário
     ];
 };

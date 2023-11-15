@@ -4,9 +4,8 @@ body {
   }
 
   .navbar {
-    background-color:  rgb(50, 128, 120);
+    background-color:  #B08EAD;
     padding: 15px;
- 
     display: flex;
     justify-content: space-between;
   }
@@ -19,8 +18,9 @@ body {
 
   .second-navbar{
     margin: 0;
-    background-color: rgb(255, 255, 255) ;
+    background-color: rgb(255, 255, 255) !important;
     border:#f1e9e9 0.5px solid;
+    height: 69px;
  
   }
 
@@ -47,13 +47,17 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color:#1D1F43ff;;
+    background-color:#1c1a1c;
  
+  }
+
+  .content{
+    background-color: #fff;
   }
 
 
   .sidebar a {
-    padding: 10px;
+    padding: 20px;
     text-decoration: none;
     font-size: 1.2em;
     color: white;
@@ -75,7 +79,6 @@ body {
     margin-left: 0px !important;
     padding: 0 !important;
   }
-
 
 
   .avatar {
@@ -124,8 +127,9 @@ body {
   
     .product-card img{
         align-self: center;
-        height: 300px;
-        width: 300px;
+        height: 70%;
+        width: 70%;
+        max-height: 500px;
     }
   .product-card:hover {
     transform: scale(1.05);
@@ -177,3 +181,13 @@ body {
   font-size: 24px;
 }
 
+h1{
+  color: #4B3049;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0 auto;
+  width: 50%; /* Ajuste a largura conforme necessário */
+  padding: 10px;
+}

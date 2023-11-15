@@ -1,0 +1,179 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .navbar {
+    background-color:  rgb(50, 128, 120);
+    padding: 15px;
+ 
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar-brand {
+    font-size: 1.5em;
+    font-weight: 900;
+    color: #C66F67ff ;
+  }
+
+  .second-navbar{
+    margin: 0;
+    background-color: rgb(255, 255, 255) ;
+    border:#f1e9e9 0.5px solid;
+ 
+  }
+
+  .navbar-links {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+  }
+
+  .navbar-links a {
+    color: rgb(50, 48, 48);
+    text-decoration: none;
+    padding: 10px;
+  }
+
+  .navbar-links a:hover {
+    border-bottom: 2px solid white;
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#1D1F43ff;;
+ 
+  }
+
+
+  .sidebar a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: white;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .sidebar a:hover {
+    background-color: #555;
+    color: #fff;
+  }
+
+  .content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  .pagina-produto {
+    margin-left: 0px !important;
+    padding: 0 !important;
+  }
+
+
+
+  .avatar {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover; /* Para ajustar a imagem dentro do círculo mantendo suas proporções */
+    background-color: white;
+  }
+  
+
+  .sidebar-img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .content {
+      margin-left: 0;
+    }
+    .navbar-links {
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+
+
+  .produtos{
+ 
+    border: 1px solid #ddd;
+    width: 100%px;
+    
+  }
+/* Adicione estilos personalizados aqui */
+.product-card {
+    transition: transform 0.3s;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+   
+  }
+  
+    .product-card img{
+        align-self: center;
+        height: 300px;
+        width: 300px;
+    }
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .btn-primary {
+    background-color: rgb(146, 64, 56);
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilos para tornar o layout mais responsivo */
+  @media (max-width: 768px) {
+    .product-card {
+      margin-bottom: 30px;
+    }
+  }
+  
+  *{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  }
+
+  h1{
+    font-size: 26px;
+  }
+
+
+
+.container{
+    margin-left: 300px;
+    width: 100%;
+    display: block;
+}
+
+.cart-icon {
+  position: relative;
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+.cart-icon i {
+  font-size: 24px;
+}
+

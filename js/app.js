@@ -1,41 +1,41 @@
- const products = [
-  {
-    name: "Casaco Quadriculado",
-    price: "50",
-    imageSrc: "../assets/images/produtos/imagem_produto1.png"
-  },
+//  const products = [
+//   {
+//     name: "Casaco Quadriculado",
+//     price: "50",
+//     imageSrc: "../assets/images/produtos/imagem_produto1.png"
+//   },
 
-  {
-    name: "Moletom preto",
-    price: "20",
-    imageSrc: "../assets/images/produtos/imagem_produto2.png"
-  },
+//   {
+//     name: "Moletom preto",
+//     price: "20",
+//     imageSrc: "../assets/images/produtos/imagem_produto2.png"
+//   },
 
-  {
-    name: "Calça verde",
-    price: "25.99",
-    imageSrc: "../assets/images/produtos/imagem_produto3.png"
-  },
+//   {
+//     name: "Calça verde",
+//     price: "25.99",
+//     imageSrc: "../assets/images/produtos/imagem_produto3.png"
+//   },
 
-  {
-    name: "Moletom verde coração",
-    price: "15",
-    imageSrc: "../assets/images/produtos/imagem_produto4.png"
-  },
+//   {
+//     name: "Moletom verde coração",
+//     price: "15",
+//     imageSrc: "../assets/images/produtos/imagem_produto4.png"
+//   },
 
-  {
-    name: "Bolsa de couro preta",
-    price: "35",
-    imageSrc: "../assets/images/produtos/imagem_produto5.png"
-  },
+//   {
+//     name: "Bolsa de couro preta",
+//     price: "35",
+//     imageSrc: "../assets/images/produtos/imagem_produto5.png"
+//   },
 
-  {
-    name: "Tênis branco",
-    price: "60",
-    imageSrc: "../assets/images/produtos/imagem_produto6.png"
-  },
+//   {
+//     name: "Tênis branco",
+//     price: "60",
+//     imageSrc: "../assets/images/produtos/imagem_produto6.png"
+//   },
 
-];
+// ];
 
 var cart = [
   {
@@ -54,6 +54,8 @@ function addToCart(product, price) {
   updateCartList();
   CartCount()
 }
+
+
 
 // Função para obter o carrinho do cookie
 function getCart() {
