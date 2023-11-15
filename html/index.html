@@ -1,17 +1,5 @@
 <div class="content">
 
-    <!-- <figure class="text-center">
-        <blockquote class="blockquote">
-          <p>olá</p>
-        </blockquote>
-        <figcaption class="blockquote-footer">
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </figcaption>
-      </figure> -->
-
-
-
-
     <div class="card">
         <div class="card-header">
             Utilizar aplicação como Admin
@@ -23,8 +11,9 @@
 
             <form action="../php/sessao.php" method="GET">
                 <div class="mb-3 justify-content-center">
+                    <input type="hidden" name ="tipo" value="admin">
                     <label for="label" class="form-label">Nome de sessão</label>
-                    <input type="text" class="form-control" id="nomeAdmin" name="sessao" required>
+                    <input type="text" class="form-control" id="nomeAdmin" name="nomeSessao" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Virar Admin</button>
             </form>
@@ -46,8 +35,9 @@
                 
             <form action="../php/sessao.php" method="GET">
                 <div class="mb-3 justify-content-center">
+                    <input type="hidden" name ="tipo" value="cliente">
                     <label for="label" class="form-label">Nome de sessão</label>
-                    <input type="text" class="form-control" id="nomeCliente" name="sessao" required>
+                    <input type="text" class="form-control" id="nomeCliente" name="nomeSessao" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Virar Cliente</button>
             </form>

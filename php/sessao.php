@@ -2,10 +2,14 @@
 
 session_start();
 
-if (!isset($_SESSION['user'])){
+if (!isset($_SESSION['nomeSessao'])) {
 
-  $_SESSION["user"] = $_GET["sessao"];
-  
+  $_SESSION["tipo"] = $_GET["tipo"];
+  $_SESSION["nomeSessao"] = $_GET["nomeSessao"];
+} else {
+  session_destroy();
+  $_SESSION["tipo"] = $_GET["tipo"];
+  $_SESSION["nomeSessao"] = $_GET["nomeSessao"];
 }
 
 
@@ -13,11 +17,4 @@ if (!isset($_SESSION['user'])){
 
 
 
-echo "Olá, " . $_SESSION['user'];
-
-// if (!isset($_SESSION['user']) || $_SESSION['user'] !== 'admin') {
-//   header("Location: index.php");
-//   exit();
-
-
-// }
+echo "Olá, " . $_SESSION['nomeSessao'] . "Você é um " . $_SESSION['tipo'];

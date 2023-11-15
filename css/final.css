@@ -110,14 +110,13 @@ body {
     }
   }
 
-
   .produtos{
  
     border: 1px solid #ddd;
     width: 100%px;
     
   }
-/* Adicione estilos personalizados aqui */
+
 .product-card {
     transition: transform 0.3s;
     border: 1px solid #ddd;
