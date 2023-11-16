@@ -6,9 +6,21 @@
   $imgSrc = $_POST["imgSrc"];
 
   require_once "conexao.php";
-  $stmt = $pdo->prepare("INSERT INTO produtos (nome, preco, imgSrc) VALUES ('$name', '$price', '$imgSrc')");
+  $stmt = $pdo->prepare("INSERT INTO produtos (name, price, imageSrc) VALUES ('$name', '$price', '$imgSrc')");
 
   $stmt->execute();
+
+
+// Adicione um cookie para contar produtos adicionados
+if (!isset($_COOKIE['produtos_adicionados'])) {
+  setcookie('produtos_adicionados', 1, time() + 3600, '/');
+} else {
+  $contador = $_COOKIE['produtos_adicionados'];
+  $contador++;
+  setcookie('produtos_adicionados', $contador, time() + 3600, '/');
+}
+
+
 
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -25,6 +37,6 @@ foreach ($result as $row) {
     ];
 };
 
-print_r (json_encode($product));
+
 ?>
 

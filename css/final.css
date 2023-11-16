@@ -121,6 +121,7 @@ body {
     transition: transform 0.3s;
     border: 1px solid #ddd;
     margin-bottom: 20px;
+    padding: 20px;
    
   }
   
@@ -185,6 +186,13 @@ h1{
 }
 
 input[type="text"] {
+  display: block;
+  margin: 0 auto;
+  width: 50%; /* Ajuste a largura conforme necessário */
+  padding: 10px;
+}
+
+input[type="number"] {
   display: block;
   margin: 0 auto;
   width: 50%; /* Ajuste a largura conforme necessário */

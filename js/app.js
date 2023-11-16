@@ -1,53 +1,7 @@
-//  const products = [
-//   {
-//     name: "Casaco Quadriculado",
-//     price: "50",
-//     imageSrc: "../assets/images/produtos/imagem_produto1.png"
-//   },
-
-//   {
-//     name: "Moletom preto",
-//     price: "20",
-//     imageSrc: "../assets/images/produtos/imagem_produto2.png"
-//   },
-
-//   {
-//     name: "Calça verde",
-//     price: "25.99",
-//     imageSrc: "../assets/images/produtos/imagem_produto3.png"
-//   },
-
-//   {
-//     name: "Moletom verde coração",
-//     price: "15",
-//     imageSrc: "../assets/images/produtos/imagem_produto4.png"
-//   },
-
-//   {
-//     name: "Bolsa de couro preta",
-//     price: "35",
-//     imageSrc: "../assets/images/produtos/imagem_produto5.png"
-//   },
-
-//   {
-//     name: "Tênis branco",
-//     price: "60",
-//     imageSrc: "../assets/images/produtos/imagem_produto6.png"
-//   },
-
-// ];
-
-var cart = [
-  {
-  
-  }
-
-];
-
 
 // Função para adicionar um item ao carrinho
 function addToCart(product, price) {
-  
+
   let cart = getCart();
   cart.push({ product, price });
   setCart(cart);
@@ -106,29 +60,18 @@ function updateCartList() {
     cartListElement.innerHTML = '<p>Your cart is empty.</p>';
   } else {
     cart.forEach(item => {
-  
+
       const listItem = document.createElement('li');
 
-      
+
       totalCarrinho = parseFloat(totalCarrinho) + parseFloat(item.price)
       listItem.textContent = `${item.product} - ${item.price}€`;
-      
-      // console.log("o total é " + parseFloat(totalCarrinho))
 
-      // cartListElement.appendChild(listItem);
 
     });
-
-    // totalLabelElement.textContent = `${totalCarrinho.toFixed(2)}€`; // Arredonda para 2 casas decimais
-
 
 
   }
 
-  
 }
-
-
-
-// Ao carregar a página, atualiza a lista de carrinho com base no carrinho atual
 window.onload = updateCartList;
