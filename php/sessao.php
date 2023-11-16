@@ -2,19 +2,19 @@
 
 session_start();
 
+
 if (!isset($_SESSION['nomeSessao'])) {
 
-  $_SESSION["tipo"] = $_GET["tipo"];
-  $_SESSION["nomeSessao"] = $_GET["nomeSessao"];
+  $_SESSION["tipo"] = $_POST["tipo"];
+  $_SESSION["nomeSessao"] = $_POST["nomeSessao"];
 } else {
-  session_destroy();
-  $_SESSION["tipo"] = $_GET["tipo"];
-  $_SESSION["nomeSessao"] = $_GET["nomeSessao"];
+  // session_destroy();
+  session_unset();
+  $_SESSION["tipo"] = $_POST["tipo"];
+  $_SESSION["nomeSessao"] = $_POST["nomeSessao"];
 }
 
+header('Location: /web/views/index.php');
+  exit();
 
 
-
-
-
-echo "Olá, " . $_SESSION['nomeSessao'] . "Você é um " . $_SESSION['tipo'];

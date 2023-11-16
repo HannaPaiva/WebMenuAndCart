@@ -1,0 +1,25 @@
+<div class="content">
+
+    <h1 id = "h1"></h1>
+    
+</div>
+
+<script>
+  $(document).ready(function() {
+   
+
+            $.ajax({
+                url: '../php/mostrar_sessao.php',
+                method: 'GET',
+                success: function(data) {
+                    $('#h1').text("No momento você é:" + data);
+                    console.log(data);
+                    
+                },
+                error: function() {
+                    console.log('Erro ao obter a variável de sessão');
+                }
+            });
+        });
+
+</script>

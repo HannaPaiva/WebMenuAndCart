@@ -17,7 +17,6 @@ foreach ($result as $row) {
         'name'  => $row['name'],
         'price' => $row['price'],
         'imageSrc' => $row['imageSrc']
-        // Adicione outros campos conforme necessário
     ];
 };
 
