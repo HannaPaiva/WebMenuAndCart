@@ -7,8 +7,9 @@ function addToCart(product, price) {
   setCart(cart);
   updateCartList();
   CartCount()
-}
+  contarCarrinho()
 
+}
 
 
 // Função para obter o carrinho do cookie
@@ -28,6 +29,7 @@ function clearCart() {
   updateCartList();
 }
 
+
 // Função para obter o valor de um cookie por nome
 function getCookie(name) {
   const cookies = document.cookie.split('; ');
@@ -39,6 +41,7 @@ function getCookie(name) {
   }
   return null;
 }
+
 
 // Função para calcular a data de expiração do cookie (10 dias a partir de agora)
 function getCookieExpiration() {

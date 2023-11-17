@@ -5,7 +5,7 @@ $(document).ready(function() {
       url: '../php/mostrar_sessao.php',
       method: 'GET',
       success: function(data) {
-          $('#h1').text("No momento você é:" + data);
+          $('#h1').text("No momento você é: " + data);
           console.log(data);
           
       },

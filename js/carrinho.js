@@ -51,6 +51,9 @@ if (cart.length === 0) {
 
         tbody.appendChild(row);
         total_carrinho = parseFloat(total_carrinho) + parseFloat(item.price);
+
+
+
     });
 
     table.appendChild(tbody);
@@ -63,7 +66,7 @@ if (cart.length === 0) {
 }
 
 function comprar() {
-    // Adicione lógica para processar a compra, se necessário
+   
 }
 
 function removeItem(index) {

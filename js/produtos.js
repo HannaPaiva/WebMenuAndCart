@@ -1,22 +1,23 @@
 
 
 $(document).ready(function () {
-    // Chame a função GetProductData e, em seguida, renderize os produtos na conclusão bem-sucedida
-    GetProductData().done(function (products) {
-        console.log(products);
-        renderProducts(products);
-    }).fail(function (error) {
-        console.error("Erro ao obter dados do produto:", error);
+  
+  getProdutos()
+    .done(function (products) {
+      console.log(products);
+      renderProducts(products);
+    })
+    .fail(function (error) {
+      console.error("Erro ao obter dados do produto:", error);
     });
 
-    CartCount();
+  CartCount();
 });
 
 function renderProducts(products) {
-const container = document.getElementById("productContainer");
+  const container = document.getElementById("productContainer");
 
-
-products.forEach(product => {
+  products.forEach((product) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("col-md-4");
 
@@ -32,33 +33,24 @@ products.forEach(product => {
     `;
 
     container.appendChild(cardDiv);
-});
-} 
-
-
+  });
+}
 
 // Chame a função para renderizar os produtos
 renderProducts();
 
-
 function CartCount() {
-  
   let cart = getCart();
-  let cartCounter = $('#cart-counter');
+  let cartCounter = $("#cart-counter");
   let cartCount = cart.length;
   cartCounter.text(cartCount);
-
-
 }
 
-function GetProductData() {
-    // Retorna a promessa da solicitação AJAX
-    return $.ajax({
-        method: "GET",
-        url: "../php/getProdutos.php",
-        dataType: "json",
-    });
+function getProdutos() {
+  // Retorna a promessa da solicitação AJAX
+  return $.ajax({
+    method: "GET",
+    url: "../php/getProdutos.php",
+    dataType: "json",
+  });
 }
-
-  
-
