@@ -1,177 +1,134 @@
- <!-- <div class="content">
-
- <div class="conteudo" id="conteudoDinamico"></div>
-
- </div> -->
-
-
-
-<!-- <script>
-    function carregarDadosCheckout() {
-       const cart = getCart();
-       renderizarPagina(cart);
-    }
-
-
-    carregarDadosCheckout();
-
-    function renderizarPagina(dados) {
-    var conteudoDinamico = $('#conteudoDinamico');
-    // Limpa o conteúdo existente
-    conteudoDinamico.empty();
-
-    var tabela = $('<table>').addClass('table table-bordered');
-    var cabecalho = $('<thead>').append('<tr><th scope="col">Produto</th><th scope="col">Preço</th></tr>');
-    var corpoTabela = $('<tbody>');
-
-    // Adiciona linhas da tabela com dados dinâmicos
-    $.each(dados, function (indice, produto) {
-        var linha = $('<tr>').append(
-            $('<td>').text(produto.name),
-            $('<td>').text('R$ ' + parseFloat(produto.price).toFixed(2))
-        );
-        corpoTabela.append(linha);
-    });
-
-    // Calcula o subtotal
-    var subtotal = dados.reduce(function (total, produto) {
-        return total + parseFloat(produto.price);
-    }, 0);
-
-    // Adiciona as últimas linhas da tabela (subtotal, frete, total)
-    corpoTabela.append(
-        '<tr><td colspan="3" class="text-right">Subtotal</td><td>R$ ' + subtotal.toFixed(2) + '</td></tr>',
-        '<tr><td colspan="3" class="text-right">Total</td><td>R$ ' + subtotal.toFixed(2) + '</td></tr>'
-    );
-
-    // Adiciona a tabela e botão "Prosseguir para o Checkout" ao conteúdo dinâmico
-    conteudoDinamico.append(tabela.append(cabecalho).append(corpoTabela));
-    conteudoDinamico.append($('<div>').addClass('text-center').append('<button class="btn btn-primary">Prosseguir para o Checkout</button>'));
-}
-
-// Exemplo de chamada da função com os dados fornecidos
-
-
-
-
-
-
-// renderizarPaginaCheckout(dadosExemplo);
-
-</script> -->
-
-
-
-
 <div class="content">
     <nav class="navbar second-navbar ">
         <h1>Página de checkout </h1>
         <a class="navbar-brand"></a>
         <form class="form-inline">
-    
+
         </form>
     </nav>
-        <div id="cart-container"></div>
-        <label id="total-label">Total: 0.00€ </label>
-        <br>
-        <input type="hidden" id= "total" name = "total">
-        <button class="btn btn-primary" onclick="comprar()">Comprar</button>
+    <div id="cart-container"></div>
+    <label id="total-label">Total: 0.00€ </label>
+    <br>
+    <input type="hidden" id="total" name="total">
+    <button class="btn btn-primary" onclick="comprar()">Comprar</button>
 </div>
 
-  
+
 
 <script>
     let isCartDisplayed = false;
 
-function on_load() {
-    if (!isCartDisplayed) {
-        mostrar_carrinho();
-        isCartDisplayed = true;
+    function on_load() {
+        if (!isCartDisplayed) {
+            mostrar_checkout();
+            isCartDisplayed = true;
+        }
     }
-}
 
-window.addEventListener('load', on_load);
+    window.addEventListener('load', on_load);
 
 
-function mostrar_carrinho() {
-const cart = getCart();
-const cartContainer = document.getElementById('cart-container');
-const totalLabel = document.getElementById('total-label');
-const totalInput = document.getElementById('total');
+    function mostrar_checkout() {
+        const cart = getCart();
+        const cartContainer = document.getElementById('cart-container');
+        const totalLabel = document.getElementById('total-label');
+        const totalInput = document.getElementById('total');
 
-var total_carrinho = 0;
+        var total_carrinho = 0;
 
-if (cart.length === 0) {
-    cartContainer.innerHTML = '<p>O seu carrinho está vazio.</p>';
-} else {
-    // Criar tabela Bootstrap
-    const table = document.createElement('table');
-    table.classList.add('table');
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>O seu carrinho está vazio.</p>';
+        } else {
+            // Criar tabela Bootstrap
+            const table = document.createElement('table');
+            table.classList.add('table');
 
-    // Adicionar cabeçalho da tabela
-    const thead = document.createElement('thead');
-    thead.innerHTML = `
+            // Adicionar cabeçalho da tabela
+            const thead = document.createElement('thead');
+            thead.innerHTML = `
         <tr>
             <th scope="col">Produto</th>
             <th scope="col">Preço</th>
          
         </tr>
     `;
-    table.appendChild(thead);
+            table.appendChild(thead);
 
-    // Adicionar itens do carrinho como linhas na tabela
-    const tbody = document.createElement('tbody');
-    cart.forEach((item, index) => {
-        const row = document.createElement('tr');
+            // Adicionar itens do carrinho como linhas na tabela
+            const tbody = document.createElement('tbody');
+            cart.forEach((item, index) => {
+                const row = document.createElement('tr');
 
-        row.innerHTML = `
+                row.innerHTML = `
             <td>${item.product}</td>
             <td>${item.price}€</td>
         `;
 
-        tbody.appendChild(row);
-        total_carrinho = parseFloat(total_carrinho) + parseFloat(item.price);
+                tbody.appendChild(row);
+                total_carrinho = parseFloat(total_carrinho) + parseFloat(item.price);
 
 
 
-    });
+            });
 
-    table.appendChild(tbody);
+            table.appendChild(tbody);
 
-    // Limpar o conteúdo anterior antes de adicionar o novo
-    cartContainer.innerHTML = '';
-    cartContainer.appendChild(table);
-    totalInput.value = total_carrinho;
-    totalLabel.textContent = `Total da compra: ${total_carrinho.toFixed(2)}€`;
-}
-}
-
-
-
-
-function comprar() {
-    const cart = getCart();
- 
-    const totalInput = document.getElementById('total').value;
-    console.log(JSON.stringify(cart));
-    $.ajax({
-        type: 'POST',
-        url: '../php/postCompras.php',
-        data: { produtos: JSON.stringify(cart), total: totalInput },
-        success: function (response) {
-            console.log(response) 
-            // window.alert("Compra efetuada com sucesso");
-        },
-        error: function (error) {
-            console.log('Erro na chamada AJAX: ' + error);
+            // Limpar o conteúdo anterior antes de adicionar o novo
+            cartContainer.innerHTML = '';
+            cartContainer.appendChild(table);
+            totalInput.value = total_carrinho;
+            totalLabel.textContent = `Total da compra: ${total_carrinho.toFixed(2)}€`;
         }
-    });
+    }
 
 
-}
 
+
+    function comprar() {
+        const cart = getCart();
+
+        const totalInput = document.getElementById('total').value;
+        console.log(JSON.stringify(cart));
+        $.ajax({
+            type: 'POST',
+            url: '../php/postCompras.php',
+            data: { produtos: JSON.stringify(cart), total: totalInput },
+            success: function (response) {
+                console.log(response)
+                window.alert("Compra efetuada com sucesso");
+                voltar();
+
+            },
+            error: function (error) {
+                console.log('Erro na chamada AJAX: ' + error);
+            }
+        });
+
+
+    }
+
+
+
+    function setCart(cart) {
+        const cookieValue = JSON.stringify(cart);
+        document.cookie = `cart=${cookieValue}; expires=${getCookieExpiration()}; path=/`;
+    }
+
+    function voltar() {
+        setCart([]);
+        window.location.href = '../views/carrinho.php';
+
+    }
+
+
+    function getCookieExpiration() {
+        const date = new Date();
+        date.setDate(date.getDate() + 10);
+        return date.toUTCString();
+    }
 
 </script>
 
 <script src="../js/produtos.js"></script>
+<script src="../js/carrinho.js"></script>
 <script src="../js/carrinho.js"></script>
