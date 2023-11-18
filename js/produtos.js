@@ -64,7 +64,7 @@ function getCookieExpiration() {
 $(document).ready(function () {
   getProdutos()
     .done(function (products) {
-      console.log(products);
+   
       renderProducts(products);
     })
     .fail(function (error) {
@@ -129,7 +129,7 @@ function postProduto() {
       url: '../php/postProdutos.php',
       data: { imgSrc: imgSrc, price: price, name: product },
       success: function(response) {
-          console.log(response);
+       
       },
       error: function(error) {
           console.log('Erro na chamada AJAX: ' + error);

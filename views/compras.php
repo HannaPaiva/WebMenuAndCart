@@ -5,42 +5,10 @@ require_once "../html/components/sidebarAdmin.html";
 ?>
 
 <div class="content">
-    <div class="mb-3 justify-content-center">
-        <h2>Formulário de Inserção de Produtos</h2>
 
-        <h1 id="counter">Produtos adicionados nessa sessão: </h1>
-        <form id="produtoForm" style="padding:50px">
-
-            <div class="form-group">
-                <label for="imgSrc">URL da Imagem:</label>
-                <input type="text" class="form-control" id="imgSrc" name="imgSrc" required>
-            </div>
-
-            <!-- Campo de Preço -->
-            <div class="form-group">
-                <label for="price">Preço:</label>
-                <input type="number" class="form-control" id="price" name="price" required>
-            </div>
-
-            <!-- Campo de Produto -->
-            <div class="form-group">
-                <label for="product">Nome do Produto:</label>
-                <input type="text" class="form-control" id="product" name="name" required>
-            </div>
-
-            <!-- Botão de Envio -->
-            <button class="btn btn-primary" onclick="postProdutos()">Inserir Produto</button>
-        </form>
-
-
-    </div>
-
-
-
-    <h2 class="mt-4 mb-4">Produtos</h2>
     <div class="row">
         <!-- PRODUTOS DINÂMICOS -->
-        <div class="row" id="productContainer">
+        <div class="row" id="tabela-produtos">
 
         </div>
     </div>
@@ -54,6 +22,7 @@ require_once "../html/components/sidebarAdmin.html";
 
 
 <script src="../js/admin.js"></script>
+<script src="../js/listar_compras.js"></script>
 
 <!-- SELECT
   c.nomeCliente AS nome_cliente,
@@ -68,3 +37,77 @@ JOIN
   produtos p ON cr.idProduto = p.id
 WHERE
   c.nomeCliente = 'NomeDoCliente'; -- Substitua 'NomeDoCliente' pelo nome do cliente desejado -->
+
+
+
+  <script>
+    /* 
+--------------------------------------------------------------------------------------------
+    AJAX + JQUERY para devolver as funções principais
+--------------------------------------------------------------------------------------------
+*/
+function getCompras() {
+    return $.ajax({
+      method: "GET",
+      url: "../php/getCompras.php",
+      dataType: "json",
+    });
+  }
+  
+
+
+$(document).ready(function () {
+    getCompras()
+    .done(function (products) {
+      renderProducts(products);
+      console.log(products);
+    })
+    .fail(function (error) {
+      console.error("Erro ao obter dados dos produtos.. ", error);
+    });
+});
+
+function renderProducts(products) {
+  // Seletor para o elemento onde você deseja adicionar a tabela
+  var tableDiv = document.getElementById("tabela-produtos");
+
+  // Criar a tabela usando um loop forEach
+  tableDiv.innerHTML = `
+
+<style>
+td{
+width: 600px;
+}
+
+</style>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">cliente</th>
+                <th scope="col">Nome do produto</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${products
+              .map(
+                (product) => `
+                
+                <tr>
+             
+                    <td>${product.nomeCliente}</td>
+                    <td> ${product.produtos_comprados}</td>
+                    <td>${product.total}€</td>
+                </tr>
+            `
+              )
+              .join("")}
+        </tbody>
+    </table>
+`;
+}
+
+renderProducts();
+
+
+  </script>

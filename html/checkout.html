@@ -1,21 +1,15 @@
- <div class="content">
+ <!-- <div class="content">
 
  <div class="conteudo" id="conteudoDinamico"></div>
-<script>
+
+ </div> -->
+
+
+
+<!-- <script>
     function carregarDadosCheckout() {
-        $.ajax({
-            url: '../php/getProdutos.php', 
-            method: 'GET',
-            dataType: 'json',
-            success: function(dados) {
-                // Renderiza os dados dinâmicos na página
-                console.log(dados)
-                renderizarPagina(dados);
-            },
-            error: function(erro) {
-                console.error('Erro na requisição AJAX: ', erro);
-            }
-        });
+       const cart = getCart();
+       renderizarPagina(cart);
     }
 
 
@@ -58,6 +52,126 @@
 // Exemplo de chamada da função com os dados fornecidos
 
 
+
+
+
+
 // renderizarPaginaCheckout(dadosExemplo);
 
+</script> -->
+
+
+
+
+<div class="content">
+    <nav class="navbar second-navbar ">
+        <h1>Página de checkout </h1>
+        <a class="navbar-brand"></a>
+        <form class="form-inline">
+    
+        </form>
+    </nav>
+        <div id="cart-container"></div>
+        <label id="total-label">Total: 0.00€ </label>
+        <br>
+        <input type="hidden" id= "total" name = "total">
+        <button class="btn btn-primary" onclick="comprar()">Comprar</button>
+</div>
+
+  
+
+<script>
+    let isCartDisplayed = false;
+
+function on_load() {
+    if (!isCartDisplayed) {
+        mostrar_carrinho();
+        isCartDisplayed = true;
+    }
+}
+
+window.addEventListener('load', on_load);
+
+
+function mostrar_carrinho() {
+const cart = getCart();
+const cartContainer = document.getElementById('cart-container');
+const totalLabel = document.getElementById('total-label');
+const totalInput = document.getElementById('total');
+
+var total_carrinho = 0;
+
+if (cart.length === 0) {
+    cartContainer.innerHTML = '<p>O seu carrinho está vazio.</p>';
+} else {
+    // Criar tabela Bootstrap
+    const table = document.createElement('table');
+    table.classList.add('table');
+
+    // Adicionar cabeçalho da tabela
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th scope="col">Produto</th>
+            <th scope="col">Preço</th>
+         
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    // Adicionar itens do carrinho como linhas na tabela
+    const tbody = document.createElement('tbody');
+    cart.forEach((item, index) => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${item.product}</td>
+            <td>${item.price}€</td>
+        `;
+
+        tbody.appendChild(row);
+        total_carrinho = parseFloat(total_carrinho) + parseFloat(item.price);
+
+
+
+    });
+
+    table.appendChild(tbody);
+
+    // Limpar o conteúdo anterior antes de adicionar o novo
+    cartContainer.innerHTML = '';
+    cartContainer.appendChild(table);
+    totalInput.value = total_carrinho;
+    totalLabel.textContent = `Total da compra: ${total_carrinho.toFixed(2)}€`;
+}
+}
+
+
+
+
+function comprar() {
+    const cart = getCart();
+ 
+    const totalInput = document.getElementById('total').value;
+    console.log(JSON.stringify(cart));
+    $.ajax({
+        type: 'POST',
+        url: '../php/postCompras.php',
+        data: { produtos: JSON.stringify(cart), total: totalInput },
+        success: function (response) {
+            console.log(response) 
+            // window.alert("Compra efetuada com sucesso");
+        },
+        error: function (error) {
+            console.log('Erro na chamada AJAX: ' + error);
+        }
+    });
+
+
+}
+
+
 </script>
+
+<script src="../js/produtos.js"></script>
+<script src="../js/carrinho.js"></script>

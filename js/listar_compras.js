@@ -3,37 +3,25 @@
     AJAX + JQUERY para devolver as funções principais
 --------------------------------------------------------------------------------------------
 */
-function getProdutos() {
+function getCompras() {
     return $.ajax({
       method: "GET",
-      url: "../php/getProdutos.php",
+      url: "../php/getCompras.php",
       dataType: "json",
     });
   }
   
-  function contador() {
-    return $.ajax({
-      method: "GET",
-      url: "../php/cookies.php",
-    });
-  }
-  
+
 
 $(document).ready(function () {
-    getProdutos()
+  
+    getCompras()
     .done(function (products) {
       renderProducts(products);
+     
     })
     .fail(function (error) {
       console.error("Erro ao obter dados dos produtos.. ", error);
-    });
-
-  contador()
-    .done(function (counter) {
-      $("#counter").text("Produtos adicionados nessa sessão: " + counter);
-    })
-    .fail(function (error) {
-      console.error("Erro ao obter dados do contador", error);
     });
 });
 

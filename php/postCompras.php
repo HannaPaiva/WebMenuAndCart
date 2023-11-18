@@ -1,42 +1,42 @@
 <?php
 
+  session_start();  
+  $produtos = $_POST["produtos"];
+  $total = $_POST["total"];
 
-  $name = $_POST["name"];
-  $price = $_POST["price"];
-  $imgSrc = $_POST["imgSrc"];
+  $produtosArray = json_decode($produtos, true);
 
+  if(isset($_SESSION["nomeSessao"])){
+    $cliente = $_SESSION["nomeSessao"];
+  }else{
+    $cliente = "default";
+  }
+  
   require_once "conexao.php";
-  $stmt = $pdo->prepare("INSERT INTO produtos (name, price, imageSrc) VALUES ('$name', '$price', '$imgSrc')");
+
+
+  $stmt = $pdo->prepare("INSERT INTO compras VALUES (DEFAULT,'$cliente', '$total')");
 
   $stmt->execute();
-
-
-// Adicione um cookie para contar produtos adicionados
-if (!isset($_COOKIE['produtos_adicionados'])) {
-  setcookie('produtos_adicionados', 1, time() + 3600, '/');
-} else {
-  $contador = $_COOKIE['produtos_adicionados'];
-  $contador++;
-  setcookie('produtos_adicionados', $contador, time() + 3600, '/');
-}
 
 
 
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+  $idCompra = $pdo->lastInsertId();
 
-$product = [];
+  foreach ($produtosArray as $produto) {
+    $nomeProduto = $produto["product"];
+    $precoProduto = $produto["price"];
+  
+    $stmt = $pdo->prepare("INSERT INTO carrinho (idProduto, precoProduto, idCompra) VALUES (:idProduto, :precoProduto, :idCompra)");
+    $stmt->bindParam(':idProduto', $nomeProduto);
+    $stmt->bindParam(':precoProduto', $precoProduto);
+    $stmt->bindParam(':idCompra', $idCompra);
+    $stmt->execute();
+  }
 
-foreach ($result as $row) {
-    $product[] = [
-        'id'    => $row['id'],
-        'name'  => $row['name'],
-        'price' => $row['price'],
-        // Adicione outros campos conforme necessário
-    ];
-};
 
 
-?>
-
+echo ("sucesso");
