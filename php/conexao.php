@@ -4,11 +4,8 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$port = "80";
 $dbname = "loja";
 
 
-$pdo = new PDO('mysql:host=localhost;dbname=loja', 'root', '');
-
-
+$pdo = new PDO("mysql:host={$servername};dbname={$dbname}", $username, $password);
 // ?>

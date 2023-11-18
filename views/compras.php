@@ -8,7 +8,7 @@ require_once "../html/components/sidebarAdmin.html";
 
     <div class="row">
         <!-- PRODUTOS DINÂMICOS -->
-        <div class="row" id="tabela-produtos">
+        <div class="row" id="tabela-produtos" style="padding:20px">
 
         </div>
     </div>
