@@ -84,7 +84,10 @@ function comprar() {
 
 
 
-
+function checkout() {
+    // Redireciona para o checkout.php
+    window.location.href = '../views/checkout.php';
+}
 
 
 function removeItem(index) {

@@ -1,3 +1,4 @@
+let isCartDisplayed = false;
 
 function on_load() {
     if (!isCartDisplayed) {
@@ -80,9 +81,5 @@ function removeItem(index) {
     mostrar_carrinho();
     }
     
-}
-
-function checkout(){
-    window.location.href = '../views/checkout.php';
 }
 
