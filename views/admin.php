@@ -40,7 +40,7 @@ require_once "../html/components/sidebarAdmin.html";
     <h2 class="mt-4 mb-4">Produtos</h2>
     <div class="row">
       <!-- PRODUTOS DINÂMICOS -->
-      <div class="row" id="productContainer">
+      <div class="row" id="tabela-produtos">
         
       </div>
     </div>
@@ -52,6 +52,6 @@ require_once "../html/components/sidebarAdmin.html";
 
 
 
-
+<script src="../js/produtos.js"></script>
 <script src="../js/admin.js"></script>
-<script src="../js/postProdutos.js"></script>
+

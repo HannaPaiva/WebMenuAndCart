@@ -11,9 +11,10 @@ window.addEventListener('load', on_load);
 
 
 function mostrar_carrinho() {
+const cart = getCart();
 const cartContainer = document.getElementById('cart-container');
 const totalLabel = document.getElementById('total-label');
-const cart = getCart();
+
 var total_carrinho = 0;
 
 if (cart.length === 0) {
@@ -75,6 +76,11 @@ function removeItem(index) {
     if (index >= 0 && index < cart.length) {
         cart.splice(index, 1);
         setCart(cart);
-        mostrar_carrinho(); // Atualiza a exibição do carrinho após a remoção
+        // mostrar_carrinho(); // Atualiza a exibição do carrinho após a remoção
     }
+    if (index == 0){
+        mostrar_carrinho();
+    }
+    
 }
+

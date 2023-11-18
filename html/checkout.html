@@ -1,54 +1,5 @@
-<!-- <div class="content">
+ <div class="content">
 
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-                <th scope="col">Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Product 1</td>
-                <td>
-                    <input type="number" class="form-control" value="1">
-                </td>
-                <td>$20.00</td>
-                <td>$20.00</td>
-            </tr>
-            <tr>
-                <td>Product 2</td>
-                <td>
-                    <input type="number" class="form-control" value="2">
-                </td>
-                <td>$15.00</td>
-                <td>$30.00</td>
-            </tr>
-
-            <tr>
-                <td colspan="3" class="text-right">Subtotal</td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-right">Shipping</td>
-                <td>$5.00</td>
-            </tr>
-            <tr>
-                <td colspan="3" class="text-right">Total</td>
-                <td>$55.00</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="text-center">
-        <button class="btn btn-primary">Proceed to Checkout</button>
-    </div>
-</div>
-
- -->
  <div class="conteudo" id="conteudoDinamico"></div>
 <script>
     function carregarDadosCheckout() {
@@ -58,7 +9,8 @@
             dataType: 'json',
             success: function(dados) {
                 // Renderiza os dados dinâmicos na página
-                renderizarPaginaCheckout(dados);
+                console.log(dados)
+                renderizarPagina(dados);
             },
             error: function(erro) {
                 console.error('Erro na requisição AJAX: ', erro);
@@ -67,42 +19,45 @@
     }
 
 
+    carregarDadosCheckout();
 
-   
+    function renderizarPagina(dados) {
+    var conteudoDinamico = $('#conteudoDinamico');
+    // Limpa o conteúdo existente
+    conteudoDinamico.empty();
 
-    function renderizarPaginaCheckout(dados) {
-        var conteudoDinamico = $('#conteudoDinamico');
-        conteudoDinamico.empty(); // Limpa o conteúdo existente
+    var tabela = $('<table>').addClass('table table-bordered');
+    var cabecalho = $('<thead>').append('<tr><th scope="col">Produto</th><th scope="col">Preço</th></tr>');
+    var corpoTabela = $('<tbody>');
 
-        var tabela = $('<table>').addClass('table table-bordered');
-        var cabecalho = $('<thead>').append('<tr><th scope="col">Produto</th><th scope="col">Quantidade</th><th scope="col">Preço</th><th scope="col">Total</th></tr>');
-        var corpoTabela = $('<tbody>');
-
-        // Adiciona linhas da tabela com dados dinâmicos
-        $.each(dados.produtos, function(indice, produto) {
-            var linha = $('<tr>').append(
-                $('<td>').text(produto.nome),
-                $('<td>').append($('<input>').attr({ type: 'number', class: 'form-control', value: produto.quantidade })),
-                $('<td>').text('R$ ' + produto.preco.toFixed(2)),
-                $('<td>').text('R$ ' + (produto.quantidade * produto.preco).toFixed(2))
-            );
-            corpoTabela.append(linha);
-        });
-
-        // Adiciona as últimas linhas da tabela (subtotal, frete, total)
-        corpoTabela.append(
-            '<tr><td colspan="3" class="text-right">Subtotal</td><td>R$ ' + dados.subtotal.toFixed(2) + '</td></tr>',
-            '<tr><td colspan="3" class="text-right">Frete</td><td>R$ ' + dados.frete.toFixed(2) + '</td></tr>',
-            '<tr><td colspan="3" class="text-right">Total</td><td>R$ ' + dados.total.toFixed(2) + '</td></tr>'
+    // Adiciona linhas da tabela com dados dinâmicos
+    $.each(dados, function (indice, produto) {
+        var linha = $('<tr>').append(
+            $('<td>').text(produto.name),
+            $('<td>').text('R$ ' + parseFloat(produto.price).toFixed(2))
         );
-
-        // Adiciona a tabela e botão "Prosseguir para o Checkout" ao conteúdo dinâmico
-        conteudoDinamico.append(tabela.append(cabecalho).append(corpoTabela));
-        conteudoDinamico.append($('<div>').addClass('text-center').append('<button class="btn btn-primary">Prosseguir para o Checkout</button>'));
-    }
-
-    // Chama a função para carregar os dados ao carregar a página
-    $(document).ready(function() {
-        carregarDadosCheckout();
+        corpoTabela.append(linha);
     });
+
+    // Calcula o subtotal
+    var subtotal = dados.reduce(function (total, produto) {
+        return total + parseFloat(produto.price);
+    }, 0);
+
+    // Adiciona as últimas linhas da tabela (subtotal, frete, total)
+    corpoTabela.append(
+        '<tr><td colspan="3" class="text-right">Subtotal</td><td>R$ ' + subtotal.toFixed(2) + '</td></tr>',
+        '<tr><td colspan="3" class="text-right">Total</td><td>R$ ' + subtotal.toFixed(2) + '</td></tr>'
+    );
+
+    // Adiciona a tabela e botão "Prosseguir para o Checkout" ao conteúdo dinâmico
+    conteudoDinamico.append(tabela.append(cabecalho).append(corpoTabela));
+    conteudoDinamico.append($('<div>').addClass('text-center').append('<button class="btn btn-primary">Prosseguir para o Checkout</button>'));
+}
+
+// Exemplo de chamada da função com os dados fornecidos
+
+
+// renderizarPaginaCheckout(dadosExemplo);
+
 </script>

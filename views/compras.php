@@ -29,22 +29,22 @@ require_once "../html/components/sidebarAdmin.html";
             </div>
 
             <!-- Botão de Envio -->
-            <button class="btn btn-primary" onclick="postProduto()">Inserir Produto</button>
+            <button class="btn btn-primary" onclick="postProdutos()">Inserir Produto</button>
         </form>
 
 
     </div>
 
 
-  
+
     <h2 class="mt-4 mb-4">Produtos</h2>
     <div class="row">
-      <!-- PRODUTOS DINÂMICOS -->
-      <div class="row" id="productContainer">
-        
-      </div>
+        <!-- PRODUTOS DINÂMICOS -->
+        <div class="row" id="productContainer">
+
+        </div>
     </div>
-  </div>
+</div>
 
 </div>
 
@@ -54,4 +54,17 @@ require_once "../html/components/sidebarAdmin.html";
 
 
 <script src="../js/admin.js"></script>
-<script src="../js/postProdutos.js"></script>
+
+<!-- SELECT
+  c.nomeCliente AS nome_cliente,
+  p.name AS nome_produto,
+  p.price AS preco_produto,
+  c.total AS total_compra
+FROM
+  compras c
+JOIN
+  carrinho cr ON c.idCompra = cr.idCompra
+JOIN
+  produtos p ON cr.idProduto = p.id
+WHERE
+  c.nomeCliente = 'NomeDoCliente'; -- Substitua 'NomeDoCliente' pelo nome do cliente desejado -->
